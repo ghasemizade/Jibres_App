@@ -4,9 +4,8 @@ import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Intro.dart';
-import 'package:flutter_application_1/data/json.dart';
-import 'data/json.dart';
+import 'package:flutter_application_1/IntroPersian.dart';
+import 'package:flutter_application_1/Lang.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -168,7 +167,7 @@ class _splashScreenState extends State<splashScreen>
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) {
-        return IntroSlide();
+        return Language();
       }),
     );
   }

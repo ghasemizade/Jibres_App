@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/IntroEnglish.dart';
 //import 'package:flutter_application_1/HomePage.dart';
-import 'package:flutter_application_1/Intro.dart';
+import 'package:flutter_application_1/IntroPersian.dart';
+import 'package:flutter_application_1/Lang.dart';
 import 'package:flutter_application_1/splash.dart';
 
 // import 'package:flutter_application_1/Login.dart';
