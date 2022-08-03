@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Intro.dart';
-
+import 'package:flutter_application_1/data/json.dart';
+import 'data/json.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -23,12 +25,22 @@ class _splashScreenState extends State<splashScreen>
   var isDeviceConnected = false;
   bool isAlertSet = false;
 
+  String logo = '';
+  String theme = '';
+  String title = '';
+  String desc = '';
+  String meta = '';
+  String from = '';
+  String to = '';
+  String primary = '';
+  String secondary = '';
+
   @override
   void initState() {
+    _getData();
     getConnectivity();
     super.initState();
     _handleSplash();
-    super.initState();
   }
 
   getConnectivity() =>
@@ -50,7 +62,6 @@ class _splashScreenState extends State<splashScreen>
 
   @override
   Widget build(BuildContext context) {
-    //getData();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 200, 10, 90),
       body: Center(
@@ -60,12 +71,14 @@ class _splashScreenState extends State<splashScreen>
               height: 180.0,
             ),
             Padding(
-                padding: EdgeInsets.symmetric(horizontal: 80),
-                child: Image(
-                    image:
-                        AssetImage('Images/Jibres-Logo-icon-white-1024.png'))),
+              padding: EdgeInsets.symmetric(horizontal: 80),
+              child: Image(
+                image: NetworkImage(
+                    'https://cdn.jibres.ir/logo/icon-white/png/Jibres-Logo-icon-white-1024.png'),
+              ),
+            ),
             Text(
-              "جیبرس",
+              title,
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 32,
@@ -73,7 +86,7 @@ class _splashScreenState extends State<splashScreen>
               ),
             ),
             Text(
-              "بفروش و لذت ببر",
+              desc,
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 20,
@@ -87,7 +100,7 @@ class _splashScreenState extends State<splashScreen>
               strokeWidth: 2,
             ),
             Text(
-              "قدرت گرفته از جیبرس",
+              meta,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.white,
@@ -122,34 +135,33 @@ class _splashScreenState extends State<splashScreen>
         ),
       );
 
-  // var logo = '';
-  // var theme = '';
-  // var title = '';
-  // var desc = '';
-  // var meta = '';
-  // var from = '';
-  // var to = '';
-  // var primary = '';
-  // var secondary = '';
+  void _getData() async {
+    var uri = Uri.parse('https://core.jibres.ir/r10/android/splash');
+    Response response = await get(uri);
+    String logo1 = jsonDecode(response.body)['result']['logo'];
+    String theme1 = jsonDecode(response.body)['result']['theme'];
+    String title1 = jsonDecode(response.body)['result']['title'];
+    String desc1 = jsonDecode(response.body)['result']['desc'];
+    String meta1 = jsonDecode(response.body)['result']['meta'];
+    int sleep1 = jsonDecode(response.body)['result']['sleep'];
+    String from1 = jsonDecode(response.body)['result']['bg']['from'];
+    String to1 = jsonDecode(response.body)['result']['bg']['to'];
+    String primary1 = jsonDecode(response.body)['result']['color']['primary'];
+    String secondary1 =
+        jsonDecode(response.body)['result']['color']['secondary'];
 
-  // void getData() async {
-  //   var uri = Uri.parse('https://core.jibres.ir/r10/android/splash');
-
-  //   Response response = await get(uri);
-
-  //   setState(() {
-  //     logo = jsonDecode(response.body)["result"]["logo"];
-  //     theme = jsonDecode(response.body)["result"]["theme"];
-  //     title = jsonDecode(response.body)["result"]["title"];
-  //     desc = jsonDecode(response.body)["result"]["desc"];
-  //     meta = jsonDecode(response.body)["result"]["meta"];
-  //     sleep = jsonDecode(response.body)["result"]["sleep"];
-  //     from = jsonDecode(response.body)["result"]["bg"]["from"];
-  //     to = jsonDecode(response.body)["result"]["bg"]["to"];
-  //     primary = jsonDecode(response.body)["result"]["color"]["primary"];
-  //     secondary = jsonDecode(response.body)["result"]["color"]["primary"];
-  //   });
-  // }
+    setState(() {
+      logo = logo1;
+      theme = theme1;
+      title = title1;
+      desc = desc1;
+      meta = meta1;
+      from = from1;
+      to = to1;
+      primary = primary1;
+      secondary = secondary1;
+    });
+  }
 
   void _handleSplash() async {
     await Future.delayed(Duration(milliseconds: 3000));

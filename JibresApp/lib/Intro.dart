@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:http/http.dart';
 
 class IntroSlide extends StatefulWidget {
   const IntroSlide({Key? key}) : super(key: key);
@@ -57,9 +59,14 @@ class IntroSlideState extends State<IntroSlide> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) {
-            return WebView(
-              initialUrl: ('https://jibres.ir/'),
-              javascriptMode: JavascriptMode.unrestricted,
+            return Scaffold(
+              backgroundColor: const Color.fromARGB(255, 200, 10, 90),
+              body: SafeArea(
+                child: WebView(
+                  initialUrl: ('https://jibres.ir/'),
+                  javascriptMode: JavascriptMode.unrestricted,
+                ),
+              ),
             );
           }),
         );
