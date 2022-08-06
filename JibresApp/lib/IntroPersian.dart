@@ -1,10 +1,10 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:http/http.dart';
+
+import 'data/modle/introJson.dart';
+import 'data/modle/splashJson.dart';
 
 class IntroSlide extends StatefulWidget {
   const IntroSlide({Key? key}) : super(key: key);
@@ -22,26 +22,26 @@ class IntroSlideState extends State<IntroSlide> {
 
     slides.add(
       Slide(
-        title: "سلام",
-        description: "به دنیای جیبرس خوش آمدید",
-        pathImage: "Images/Jibres-Logo-icon-white-1024.png",
-        backgroundColor: const Color.fromARGB(255, 200, 10, 90),
+        title: title1,
+        description: desc1,
+        pathImage: "Images/logo.png",
+        backgroundColor: HexColor(from),
       ),
     );
     slides.add(
       Slide(
-        title: "بفروش و لذت ببر",
-        description: "پلتفرم تجارت الکترونیک همه کاره",
-        pathImage: "Images/Jibres-Logo-icon-white-1024.png",
-        backgroundColor: const Color.fromARGB(255, 200, 10, 90),
+        title: subtitle2,
+        description: desc2,
+        pathImage: "Images/logo.png",
+        backgroundColor: HexColor(from),
       ),
     );
     slides.add(
       Slide(
-        title: "جیبرس",
-        description: ".برخی اوقات شما نیاز به یک تغییر بزرگ دارید",
-        pathImage: "Images/Jibres-Logo-icon-white-1024.png",
-        backgroundColor: const Color.fromARGB(255, 200, 10, 90),
+        title: title,
+        description: subtitle5,
+        pathImage: "Images/logo.png",
+        backgroundColor: HexColor(from),
       ),
     );
   }
@@ -60,10 +60,10 @@ class IntroSlideState extends State<IntroSlide> {
           context,
           MaterialPageRoute(builder: (context) {
             return Scaffold(
-              backgroundColor: const Color.fromARGB(255, 200, 10, 90),
+              backgroundColor: HexColor(from),
               body: SafeArea(
                 child: WebView(
-                  initialUrl: ('https://jibres.ir/'),
+                  initialUrl: ('https://jibres.ir/my'),
                   javascriptMode: JavascriptMode.unrestricted,
                 ),
               ),
